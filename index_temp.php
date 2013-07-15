@@ -11,16 +11,28 @@
 	</head>
 	<body>
 		<div id="wrapper">
+
 			<div id="login">
-		<?php 	if ( isset( $_SESSION["login_error_messages"]) )
-				{	?>
-					<div class="display_messages error_border">
-		<?php		foreach( $_SESSION["login_error_messages"] as $message )
+				<div
+				<?php
+					if ( isset( $_SESSION["login_success_message"]) )
 					{	?>
-						<h3><?= $message ?></h3>
-		<?php 		}	?>
-					</div>	
-		<?php 	}	?>
+						class="display_messages success_border">
+						<!-- printout both classes together for better readability! -->
+				<?php	echo "<h3>{$_SESSION['login_success_message']}</h3>";
+
+					}
+					else if ( isset( $_SESSION["login_error_messages"]) )
+					{	?>
+						class="display_messages error_border">
+				<?php	foreach( $_SESSION["login_error_messages"] as $message )
+						{
+							echo "<h3>{$message}</h3>";
+						}
+					}
+					else //no border to display, so just put closing bracket for tag
+					{	?>><?php }	?>
+				</div>
 				<h2>Log In to an Existing Account: </h2>
 				<form id="login_form" class="form" action="process.php" method="post">
 					<div>
