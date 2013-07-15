@@ -12,16 +12,26 @@
 	{
 		foreach($messages as $message)
 		{
+
+
 			$author_name = get_author_name($message);
 			$date = $message["display_date"];
 			//can this be improved? Seems clunky...
+			//display message:
 			echo "<div class='message_box left_padding'>";
 			echo "<h4>{$author_name} - {$date}</h4>";
-			echo "<p class='well'>{$message['message']}</p>";
+			echo "<div class='well'>{$message['message']}</div>";
+			//display delete option, if applicable:
+			if ( $message["user_id"] == $_SESSION["user"]["id"] )
+			{	//This message belongs to us, the logged_in user
+				echo "<button type='button' class='btn btn-danger bottom-margin'>Delete Message</button>";
+			}
+			//display comments:
 			$comments = get_comments($message);
 			display_comments($comments);
 			comment_form($message);
-			echo "</div>"; //this is closing the div above
+			//close the div class='message_box left_padding'
+			echo "</div>";
 		}
 	}
 
