@@ -207,6 +207,7 @@
 	else
 	{
 		//We are assuming the user wants to log out
+		//This may change in the next part of the exercise!
 		session_destroy();
 		header("location: index.php");
 	}

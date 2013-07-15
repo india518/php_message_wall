@@ -19,7 +19,7 @@
 					<li class="brand">CodingDojo Wall</li>
 				</ul>
 				<div class="navbar-text pull-right">Welcome <?= $_SESSION["user"]["first_name"] ?><span class="divider-vertical"></span>
-			 	<a href="process.php">Log Out</a>
+			 		<a href="process.php">Log Out</a>
 				</div>
 			</div>
 		</div>

@@ -7,8 +7,8 @@
 		header("location: index.php");
 	else
 	{
-		require("include/header.php");
 		require("include/functions.php");
+		require("include/header.php");
 	}
 ?>
 		<div id="display_error_messages"

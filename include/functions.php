@@ -83,4 +83,11 @@
 		<div class="clearfix"></div>
 <?php
  	}
+
+ 	function log_out()
+ 	//not using yet - maybe I'll figure this out in the next step?
+ 	{
+ 		session_destroy();
+	 	header("location: index.php");
+ 	}
  ?>
