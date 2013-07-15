@@ -24,7 +24,7 @@
 			//display delete option, if applicable:
 			if ( $message["user_id"] == $_SESSION["user"]["id"] )
 			{	//This message belongs to us, the logged_in user
-				echo "<button type='button' class='btn btn-danger bottom-margin'>Delete Message</button>";
+				create_delete_form($message);
 			}
 			//display comments:
 			$comments = get_comments($message);
@@ -40,6 +40,15 @@
 		$query = "SELECT CONCAT(first_name, ' ', last_name) as full_name FROM users WHERE id={$item['user_id']}";
 		$author = fetch_record($query);
 		return "{$author['full_name']}";
+	}
+
+	function create_delete_form($message)
+	{
+		echo "<form action='process.php' method='post'>";
+		echo "<input type='hidden' name='action' value='delete_message' />";
+		echo "<input type='hidden' name='message_id' value='{$message['id']}' />";
+		echo "<button type='submit' class='btn btn-danger bottom-margin'>Delete Message</button>";
+		echo "</form>";
 	}
 
 	function get_comments($message)

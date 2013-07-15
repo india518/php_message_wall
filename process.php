@@ -174,6 +174,23 @@
 		header("location: wall.php");
 	}
 
+	function do_remove_message()
+	{
+		$message_id = $_POST["message_id"];
+		//first, remove all comments on that message
+		do_remove_comments($message_id);
+		// now remove the message itself
+		$query = "DELETE FROM messages WHERE id = {$message_id}";
+		mysql_query($query);
+		header("location: wall.php");
+	}
+
+	function do_remove_comments($message_id)
+	{
+		$query = "DELETE FROM comments WHERE message_id = {$message_id}";
+		mysql_query($query);
+	}
+
 	//Here is the actual code!
 	if ( isset($_POST['action']) AND $_POST["action"] == "login" )
 		do_login();
@@ -183,6 +200,8 @@
 		do_post_message();
 	else if ( isset($_POST['action']) AND $_POST["action"] == "post_comment" )
 		do_post_comment();
+	else if ( isset($_POST['action']) AND $_POST["action"] == "delete_message" )
+		do_remove_message();
 	else
 	{
 		//We are assuming the user wants to log out
