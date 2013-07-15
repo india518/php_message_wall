@@ -33,8 +33,8 @@
 		else
 		{
 			// Check that user exists
-			$query = "SELECT users.* FROM users WHERE users.email = '{$_POST['email']}'";
-			$user = fetch_record($query);
+			$find_user_query = "SELECT users.* FROM users WHERE users.email = '{$_POST['email']}'";
+			$user = fetch_record($find_user_query);
 			if (! $user)
 			{
 				$_SESSION["login_error_messages"]["user"] = "There is no account with this email address. Try registering for a new account!";
@@ -107,8 +107,8 @@
 		else
 		{
 			//FIRST - check to see if user already exists
-			$query = "SELECT users.* FROM users WHERE users.email = '{$_POST['email']}'";
-			$user = fetch_record($query);
+			$find_user_query = "SELECT users.* FROM users WHERE users.email = '{$_POST['email']}'";
+			$user = fetch_record($find_user_query);
 
 			if ($user)
 			{
@@ -122,8 +122,8 @@
 				$last_name = $_POST["last_name"];
 				$email = $_POST["email"];
 				$password = md5($_POST["password"]);
-				$query = "INSERT INTO users (first_name, last_name, email, password, created_at) VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$password}', NOW())";
-				mysql_query($query);
+				$insert_user_query = "INSERT INTO users (first_name, last_name, email, password, created_at) VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$password}', NOW())";
+				mysql_query($insert_user_query);
 
 				//Quick thought to look up later: is there a true/false value
 				// associated with a mysql_query() command?
@@ -155,8 +155,8 @@
 		if ($test)
 		{	//Store message in database
 			$user_id = $_SESSION["user"]["id"];
-			$query = "INSERT INTO messages (user_id, message, created_at) VALUES ('{$user_id}', '{$message}', NOW())";
-			mysql_query($query);
+			$insert_message_query = "INSERT INTO messages (user_id, message, created_at) VALUES ('{$user_id}', '{$message}', NOW())";
+			mysql_query($insert_message_query);
 		}
 		header("location: wall.php");
 	}
@@ -170,8 +170,8 @@
 		{	//Store comment in database
 			$message_id = $_POST["message_id"];
 			$user_id = $_SESSION["user"]["id"];
-			$query = "INSERT INTO comments (message_id, user_id, comment, created_at) VALUES ('{$message_id}', '{$user_id}', '{$comment}', NOW())";
-			mysql_query($query);
+			$insert_comment_query = "INSERT INTO comments (message_id, user_id, comment, created_at) VALUES ('{$message_id}', '{$user_id}', '{$comment}', NOW())";
+			mysql_query($insert_comment_query);
 		}
 		header("location: wall.php");
 	}
@@ -182,15 +182,15 @@
 		//first, remove all comments on that message
 		remove_comments($message_id);
 		// now remove the message itself
-		$query = "DELETE FROM messages WHERE id = {$message_id}";
-		mysql_query($query);
+		$delete_message_query = "DELETE FROM messages WHERE id = {$message_id}";
+		mysql_query($delete_message_query);
 		header("location: wall.php");
 	}
 
 	function remove_comments($message_id)
 	{
-		$query = "DELETE FROM comments WHERE message_id = {$message_id}";
-		mysql_query($query);
+		$delete_comments_query = "DELETE FROM comments WHERE message_id = {$message_id}";
+		mysql_query($delete_comments_query);
 	}
 
 	//Here is the actual code!

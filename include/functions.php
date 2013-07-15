@@ -4,16 +4,14 @@
 		//query database for all messages,
 		// sorted newest to oldest
 		$id = $_SESSION["user"]["id"];
-		$query = "SELECT *, CONCAT(MONTHNAME(created_at), ' ', DAYOFMONTH(created_at), ' ', YEAR(created_at)) as display_date FROM messages ORDER BY created_at DESC";
-		return fetch_all($query);
+		$find_messages_query = "SELECT *, CONCAT(MONTHNAME(created_at), ' ', DAYOFMONTH(created_at), ' ', YEAR(created_at)) as display_date FROM messages ORDER BY created_at DESC";
+		return fetch_all($find_messages_query);
 	}
 
 	function display_messages($messages)
 	{
 		foreach($messages as $message)
 		{
-
-
 			$author_name = get_author_name($message);
 			$date = $message["display_date"];
 			//can this be improved? Seems clunky...
@@ -37,8 +35,8 @@
 
 	function get_author_name($item)
 	{
-		$query = "SELECT CONCAT(first_name, ' ', last_name) as full_name FROM users WHERE id={$item['user_id']}";
-		$author = fetch_record($query);
+		$find_author_query = "SELECT CONCAT(first_name, ' ', last_name) as full_name FROM users WHERE id={$item['user_id']}";
+		$author = fetch_record($find_author_query);
 		return "{$author['full_name']}";
 	}
 
@@ -56,8 +54,8 @@
 		//query database for all comments for this particular
 		// message, sorted oldest to newest
 		$message_id = $message["id"];
-		$query = "SELECT *, CONCAT(MONTHNAME(created_at), ' ', DAYOFMONTH(created_at), ' ', YEAR(created_at)) as display_date FROM comments WHERE message_id = {$message['id']} ORDER BY created_at ASC";
-		return fetch_all($query);
+		$find_comments_query = "SELECT *, CONCAT(MONTHNAME(created_at), ' ', DAYOFMONTH(created_at), ' ', YEAR(created_at)) as display_date FROM comments WHERE message_id = {$message['id']} ORDER BY created_at ASC";
+		return fetch_all($find_comments_query);
 	}
 
 	function display_comments($comments)
