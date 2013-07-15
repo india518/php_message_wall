@@ -73,10 +73,8 @@
 		if ( empty($_POST["first_name"]) )
 			$errors["first_name"] = "First Name cannot be blank.";
 		else if ( preg_match("#[\d]#", $_POST["first_name"]) )
-
 			//note: is_numeric($_POST["first_name"]) doesn't really work!
 			// it will allow a first name like "India518" when it shouldn't!
-
 			$errors["first_name"] = "First Name cannot contain numbers.";
 		//Last name validation
 		if ( empty($_POST["last_name"]) )
@@ -87,10 +85,6 @@
 		$message = email_validation();
 		if ( $message )
 			$errors["email"] = $message;
-		//Birthdate validation
-		// The form uses a datepicker, but let's keep this for reference.
-		// if(! empty($_POST["birth_date"]) AND ! preg_match(" '\b(0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2}\b' ", $_POST["birth_date"]) )
-		// 	$errors["birth_date"] = "Birth Date should be in valid format.";
 
 		// Password format validation
 		if( empty($_POST["password"]) )

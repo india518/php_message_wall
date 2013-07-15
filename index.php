@@ -85,10 +85,6 @@
 						<input type="text" name="email" id="email" placeholder="Email Address" <?= ( isset($_SESSION["registration_error_messages"]["email"]) ) ?
 								" class='highlight'" : "" ?> />
 					</div>
-					<div>		
-						<label for="birth_date">Birth Date: </label>
-						<input type="date" name="birth_date" id="birth_date" <?= ( isset($_SESSION["registration_error_messages"]["birth_date"]) ) ? " class='highlight'" : "" ?> />
-					</div>
 					<div>
 						<label for="password">* Password: </label>
 						<input type="password" name="password" id="password" placeholder="password" <?= ( isset($_SESSION["registration_error_messages"]["password"]) ) ? " class='highlight'" : ""	?> />
