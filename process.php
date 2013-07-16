@@ -66,7 +66,7 @@
 		}
 	} //end login()
 
-	function registration()
+	function register()
 	{
 		$min_password_length = 7;
 		$errors = array();
